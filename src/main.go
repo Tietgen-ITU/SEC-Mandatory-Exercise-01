@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"math"
 
-	"golang.org/x/text/message"
 )
+
 const (
 	SHARED_BASE float64 = 666;
 	SHARED_PRIME float64 = 6661;
@@ -44,11 +44,12 @@ func intercept(publicKey, cipher float64) (secret, message float64) {
 
 	var testSecret float64;
 	for testSecret = 1; testSecret < 1000; testSecret++ {
-		key := calculateKey(SHARED_BASE, SHARED_PRIME, testSecret);		
-		if key == publicKey {
+		
+		if key := calculateKey(SHARED_BASE, SHARED_PRIME, testSecret); key == publicKey {
 
 			message := decrypt(key, cipher);
 			return testSecret, message;
 		}
 	}	
+	return 0, 0;
 }
