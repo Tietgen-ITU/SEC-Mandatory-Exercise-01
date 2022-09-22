@@ -18,6 +18,9 @@ func main() {
 	aliceKey, messageCipher := encrypt(8, bobPk, 2000);
 	fmt.Printf("Alice's key is: %.0f, and the encrypted message is: %.0f\n", aliceKey, messageCipher);
 
+	bobSecret, message := intercept(bobPk, messageCipher);
+	fmt.Printf("Bob's secret is: %.0f, and the decrypted message is: %.0f", bobSecret, message);
+
 }
 
 func calculateKey(base, prime, secret float64) float64 {
