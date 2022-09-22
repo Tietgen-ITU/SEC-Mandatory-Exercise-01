@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"math"
+
+	"golang.org/x/text/message"
 )
 const (
 	SHARED_BASE float64 = 666;
@@ -33,13 +35,20 @@ func encrypt(secretKey, publicKey, text float64) (key, cipher float64) {
 	return secret, cipherText;
 }
 
+func decrypt(commonKey, cipher float64) float64 {
+	message := cipher / commonKey;
+	return message;
+}
+
 func intercept(publicKey, cipher float64) (secret, message float64) {
 
 	var testSecret float64;
 	for testSecret = 1; testSecret < 1000; testSecret++ {
 		key := calculateKey(SHARED_BASE, SHARED_PRIME, testSecret);		
 		if key == publicKey {
-			return testSecret, 0;
+
+			message := decrypt(key, cipher);
+			return testSecret, message;
 		}
 	}	
 }
