@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"math/big"
 )
@@ -11,12 +12,14 @@ const (
 )
 
 func main() {
+	secret := flag.Int64("n", 99, "The secret to be used in exercise. It only accepts integers.")
+	flag.Parse()
 
 	bobPk := big.NewInt(2227)
 
 	// Assignment 1
 	fmt.Printf("Assignment 1:\n")
-	alicePk, messageCipher := encrypt(*big.NewInt(99), *bobPk, *big.NewInt(2000))
+	alicePk, messageCipher := encrypt(*big.NewInt(*secret), *bobPk, *big.NewInt(2000))
 	fmt.Printf("Alice's public key is: %s, and the encrypted message is: %s\n", alicePk.Text(10), messageCipher.Text(10))
 	fmt.Println()
 
