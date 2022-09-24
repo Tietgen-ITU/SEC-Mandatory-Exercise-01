@@ -87,18 +87,20 @@ func intercept(targetPk, pk, cipher big.Int) (secret, message big.Int) {
 
 	fmt.Println("Intercepting message...")
 
+	base := big.NewInt(SHARED_BASE)
+	prime := big.NewInt(SHARED_PRIME)
 	var limit big.Int = *big.NewInt(1000)
 	incrementer := big.NewInt(1)
-	var testSecret big.Int
-	for testSecret = *big.NewInt(1); testSecret.Cmp(&limit) < 0; testSecret.Add(&testSecret, incrementer) {
+	
+	for s := *big.NewInt(1); s.Cmp(&limit) < 0; s.Add(&s, incrementer) {
 
-		key := calculateKey(*big.NewInt(SHARED_BASE), *big.NewInt(SHARED_PRIME), testSecret)
+		key := calculateKey(*base, *prime, s)
 
 		if key.Cmp(&targetPk) == 0 {
 
 			fmt.Println("Secret has been found!")
-			message := decrypt(testSecret, pk, cipher)
-			return testSecret, message
+			message := decrypt(s, pk, cipher)
+			return s, message
 		}
 	}
 
