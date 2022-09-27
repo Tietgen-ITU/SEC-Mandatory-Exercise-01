@@ -17,20 +17,29 @@ func main() {
 
 	bobPk := big.NewInt(2227)
 
+	// ----------------------------------------
 	// Assignment 1
+	// ----------------------------------------
 	fmt.Printf("Assignment 1:\n")
 	alicePk, messageCipher := encrypt(*big.NewInt(*secret), *bobPk, *big.NewInt(2000))
 	fmt.Printf("Alice's public key is: %s, and the encrypted message is: %s\n", alicePk.Text(10), messageCipher.Text(10))
 	fmt.Println()
 
+
+
+	// ----------------------------------------
 	// Assignment 2
+	// ----------------------------------------
 	fmt.Printf("Assignment 2:\n")
 	fmt.Println("Eve has seen the encrypted message from alice and tries to intercept it...")
 	bobSecret, message := intercept(*bobPk, *alicePk, *messageCipher)
 	fmt.Printf("Bob's secret is: %s, and the decrypted message is: %s\n", bobSecret.Text(10), message.Text(10))
 	fmt.Println()
 
+
+	// ----------------------------------------
 	// Assignment 3
+	// ----------------------------------------
 	fmt.Printf("Assignment 3:\n")
 	fmt.Println("Mallory also sees the message from Alice but do not have the resources to calculate Bob's secret in order to see the message.")
 	fmt.Println("Instead Mallory tries to tamper with the message...")
