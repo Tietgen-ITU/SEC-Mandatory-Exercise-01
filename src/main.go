@@ -17,6 +17,7 @@ func main() {
 
 	bobPk := big.NewInt(2227)
 
+
 	// ----------------------------------------
 	// Assignment 1
 	// ----------------------------------------
@@ -24,8 +25,6 @@ func main() {
 	alicePk, messageCipher := encrypt(*big.NewInt(*secret), *bobPk, *big.NewInt(2000))
 	fmt.Printf("Alice's public key is: %s, and the encrypted message is: %s\n", alicePk.Text(10), messageCipher.Text(10))
 	fmt.Println()
-
-
 
 	// ----------------------------------------
 	// Assignment 2
